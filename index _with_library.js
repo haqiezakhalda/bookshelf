@@ -1,47 +1,51 @@
-const simpan = () => {
+$('#simpan').click(() => {
   const simpanBuku = {
     id: Date.now(),
-    judul: document.getElementById("judul").value,
-    author: document.getElementById("author").value,
-    year: document.getElementById("year").value,
-    finished: document.querySelector('#finished').checked,
+    judul: $('#judul').val(),
+    author: $('#author').val(),
+    year: $('#year').val(),
+    finished: $('#finished').is(':checked')
   }
   console.log(simpanBuku)
   if (localStorage.length > 0) {
+    console.log("Masuk 1");
     let allBook = JSON.parse(localStorage.getItem("allBook"));
+    console.log("Check:", allBook);
     allBook.push(simpanBuku);
     localStorage.setItem("allBook", JSON.stringify(allBook));
+    console.log("Ada:", localStorage.getItem("allBook"));
   } else {
     console.log("Masuk 2");
     const allBook = [simpanBuku];
     localStorage.setItem("allBook", JSON.stringify(allBook));
+    console.log("Baru:", localStorage.getItem("allBook"));
   }
   document.getElementById("add").reset();
   unfinish("");
   finish("");
-};
+});
 
-const search = () => {
-  const judul = document.getElementById("search").value;
+$('#btnSearch').click(() => {
+  const judul = $('#search').val();
   const allBook = JSON.parse(localStorage.getItem("allBook"));
+  console.log("Check search:", allBook)
   let result = [];
   if (allBook.length > 0) {
-    document.getElementById("resultSearch").innerText= '';
     allBook.forEach((item, idx) => {
       if ((item.judul).toLowerCase().includes(judul.toLowerCase())) {
         result.push(allBook[idx]);
       }
     })
   } else {
-    let h4 = document.createElement("h4");
-    h4.innerText = 'DATABASE KOSONG';
+    $('#resultSearch').html('<h4 class="text-center title">DATABASE KOSONG</h4>')
   }
-  document.getElementById("search").value = '';
+  $('#search').val('');
   unfinish(result);
   finish(result);
-};
+});
 
 const finishRead = (id) => {
+  console.log("id finishRead:", id);
   const allBook = JSON.parse(localStorage.getItem("allBook"));
   allBook.forEach((item, idx) => {
     if ((item.id).toString() === id) {
@@ -54,6 +58,7 @@ const finishRead = (id) => {
 }
 
 const unfinishRead = (id) => {
+  console.log("id unFinishRead:", id);
   const allBook = JSON.parse(localStorage.getItem("allBook"));
   allBook.forEach((item, idx) => {
     if ((item.id).toString() === id) {
@@ -74,7 +79,7 @@ const remove = (id) => {
 }
 
 const unfinish = (data) => {
-  document.getElementById("listUnfinish").innerText = '';
+  $("#listUnfinish").text('');
   const allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
   console.log(allBook);
   let unfinishBook = [];
@@ -82,7 +87,7 @@ const unfinish = (data) => {
     allBook.forEach((item, idx) => {
       if (item.finished === false) {
         unfinishBook.push(allBook[idx]);
-        document.getElementById("listUnfinish").insertAdjacentHTML('beforeend', `<div class="box-list container">
+        $("#listUnfinish").append(`<div class="box-list container">
         <h5>${item.judul}</h5>
         <p>Penulis: ${item.author}</p>
         <p>Tahun: ${item.year}</p>
@@ -101,14 +106,14 @@ const unfinish = (data) => {
 }
 
 const finish = (data) => {
-  document.getElementById("listFinish").innerText = '';
+  $("#listFinish").text('');
   const allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
   let finishBook = [];
   if (allBook.length > 0) {
     allBook.forEach((item, idx) => {
       if (item.finished === true) {
         finishBook.push(allBook[idx]);
-        document.getElementById("listFinish").insertAdjacentHTML('beforeend', `<div class="box-list container">
+        $("#listFinish").append(`<div class="box-list container">
         <h5>${item.judul}</h5>
         <p>Penulis: ${item.author}</p>
         <p>Tahun: ${item.year}</p>
