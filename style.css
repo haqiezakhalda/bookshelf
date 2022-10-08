@@ -20,6 +20,18 @@
     min-height: 100px;
 }
 
+.box-list {
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 95%;
+    color: black;
+    height: auto;
+}
+
+.box-list > *{
+    margin-bottom: 3px;
+}
+
 .title {
     margin: 10px;
 }
