@@ -16,8 +16,8 @@ const simpan = () => {
     localStorage.setItem("allBook", JSON.stringify(allBook));
   }
   document.getElementById("add").reset();
-  unfinish("");
-  finish("");
+  unfinish('');
+  finish('');
 };
 
 const search = () => {
@@ -32,8 +32,11 @@ const search = () => {
       }
     })
   } else {
-    let h4 = document.createElement("h4");
-    h4.innerText = 'DATABASE KOSONG';
+    const h2 = document.createElement("h2");
+    h2.innerText = 'DATABASE KOSONG';
+    h2.classList.add("text-center");
+    const div = document.getElementById("resultSearch");
+    div.appendChild(h2);
   }
   document.getElementById("search").value = '';
   unfinish(result);
@@ -82,14 +85,12 @@ const unfinish = (data) => {
       if (item.finished === false) {
         unfinishBook.push(allBook[idx]);
         document.getElementById("listUnfinish").insertAdjacentHTML('beforeend', `<div class="box-list container">
-        <h5>${item.judul}</h5>
+        <h3>${item.judul}</h3>
         <p>Penulis: ${item.author}</p>
         <p>Tahun: ${item.year}</p>
-        <div class="row align-items-center">
-          <div class="col">
-            <button type="button" class="btn btn-success btn-sm" idx="${item.id}" onClick="finishRead(this.getAttribute('idx'))">Selesai Dibaca</button>
-            <button type="button" class="btn btn-danger btn-sm" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
-          </div>    
+        <div class="row">
+          <button type="button" class="btn btn-success btn-sm" idx="${item.id}" onClick="finishRead(this.getAttribute('idx'))">Selesai Dibaca</button>
+          <button type="button" class="btn btn-danger btn-sm" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
         </div>
         </div>
       </div>`);
@@ -108,14 +109,12 @@ const finish = (data) => {
       if (item.finished === true) {
         finishBook.push(allBook[idx]);
         document.getElementById("listFinish").insertAdjacentHTML('beforeend', `<div class="box-list container">
-        <h5>${item.judul}</h5>
+        <h3>${item.judul}</h3>
         <p>Penulis: ${item.author}</p>
         <p>Tahun: ${item.year}</p>
-        <div class="row align-items-center">
-          
-            <button type="button" class="btn-success" idx="${item.id}" onClick="unfinishRead(this.getAttribute('idx'))">Belum Selesai Dibaca</button>
-            <button type="button" class="btn-danger" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
-          
+        <div class="row">
+          <button type="button" class="btn-success" idx="${item.id}" onClick="unfinishRead(this.getAttribute('idx'))">Belum Selesai Dibaca</button>
+          <button type="button" class="btn-danger" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
         </div>
         </div>
       </div>`);
