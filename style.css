@@ -1,45 +1,121 @@
 * {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+  padding: 0 10px 0 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.align-items-center {
+  align-items: center!important;
+}
+
+.col {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 .navBar {
-    text-align: center;
-    background-color:darkslateblue;
-    color: white;
-    padding: 10px 0;
+  text-align: center;
+  background-color:darkslateblue;
+  color: white;
+  padding: 10px 0;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .quote {
-    margin: 20px 0 20px 0;
+  margin: 20px 0 20px 0;
 }
 
 .box {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 800px;
-    color: darkslateblue;
-    min-height: 100px;
+  border: 2px solid black;
+  width: 800px;
+  color: darkslateblue;
+  min-height: 100px;
 }
 
 .box-list {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 95%;
-    color: black;
-    height: auto;
+  border: 2px solid black;
+  width: 95%;
+  color: black;
+  height: auto;
 }
 
-.box-list > *{
-    margin-bottom: 3px;
+.box-list > * {
+  margin-bottom: 3px;
 }
 
 .title {
-    margin: 10px;
+  margin: 10px;
 }
 
 .myButton {
-    padding: 0.75rem;
-    width: 100%;
-    background-color: darkslateblue;
-    color: white;
+  padding: 0.75rem;
+  width: 100%;
+  background-color: darkslateblue;
+  color: white;
+}
+
+button {
+  border-color: transparent;
+}
+
+.myButton:hover {
+  border-color: darkslateblue;
+  padding: 0.75rem;
+  width: 100%;
+  background-color: white;
+  color: darkslateblue;
+}
+
+.btn-success {
+  padding: 5px;
+  margin: 5px;
+  background-color: green;
+  color: white;
+}
+
+.btn-success:hover {
+  border-color: green;
+  padding: 5px;
+  margin: 5px;
+  background-color: white;
+  color: green;
+}
+
+.btn-danger {
+  padding: 5px;
+  margin: 5px;
+  background-color: red;
+  color: white;
+}
+
+.btn-danger:hover {
+  border-color: red;
+  padding: 5px;
+  margin: 5px;
+  background-color: white;
+  color: red;
 }

@@ -1,0 +1,45 @@
+* {
+  margin-bottom: 10px;
+}
+
+.navBar {
+  text-align: center;
+  background-color:darkslateblue;
+  color: white;
+  padding: 10px 0;
+}
+
+.quote {
+  margin: 20px 0 20px 0;
+}
+
+.box {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 800px;
+  color: darkslateblue;
+  min-height: 100px;
+}
+
+.box-list {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 95%;
+  color: black;
+  height: auto;
+}
+
+.box-list > *{
+  margin-bottom: 3px;
+}
+
+.title {
+  margin: 10px;
+}
+
+.myButton {
+    padding: 0.75rem;
+    width: 100%;
+    background-color: darkslateblue;
+    color: white;
+}

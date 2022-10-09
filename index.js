@@ -12,7 +12,6 @@ const simpan = () => {
     allBook.push(simpanBuku);
     localStorage.setItem("allBook", JSON.stringify(allBook));
   } else {
-    console.log("Masuk 2");
     const allBook = [simpanBuku];
     localStorage.setItem("allBook", JSON.stringify(allBook));
   }
@@ -113,10 +112,10 @@ const finish = (data) => {
         <p>Penulis: ${item.author}</p>
         <p>Tahun: ${item.year}</p>
         <div class="row align-items-center">
-          <div class="col">
-            <button type="button" class="btn btn-success btn-sm" idx="${item.id}" onClick="unfinishRead(this.getAttribute('idx'))">Belum Selesai Dibaca</button>
-            <button type="button" class="btn btn-danger btn-sm" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
-          </div>    
+          
+            <button type="button" class="btn-success" idx="${item.id}" onClick="unfinishRead(this.getAttribute('idx'))">Belum Selesai Dibaca</button>
+            <button type="button" class="btn-danger" idx="${item.id}" onClick="remove(this.getAttribute('idx'))">Hapus Buku</button>
+          
         </div>
         </div>
       </div>`);
