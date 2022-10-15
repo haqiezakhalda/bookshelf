@@ -1,42 +1,66 @@
+window.addEventListener('pageshow', function() {
+  search();
+});
+
 const simpan = () => {
-  const simpanBuku = {
-    id: Date.now(),
-    judul: document.getElementById("judul").value,
-    author: document.getElementById("author").value,
-    year: document.getElementById("year").value,
-    finished: document.querySelector('#finished').checked,
+  try {
+    const inp = document.getElementById("add").querySelectorAll(".form-control");
+    console.log("Inp:", inp);
+    inp.forEach((item) => {
+      if (item.value === "") {
+        alert(`${item.id} tidak boleh kosong`);
+        throw 'exit';
+      }
+    });
+    const simpanBuku = {
+      id: Date.now(),
+      judul: document.getElementById("judul").value,
+      author: document.getElementById("author").value,
+      year: document.getElementById("year").value,
+      finished: document.querySelector('#finished').checked,
+    }
+    console.log(simpanBuku);
+    if (localStorage.length > 0) {
+      let allBook = JSON.parse(localStorage.getItem("allBook"));
+      if (allBook === null || allBook === undefined) {
+        allBook = [];
+      }
+      allBook.push(simpanBuku);
+      localStorage.setItem("allBook", JSON.stringify(allBook));
+    } else {
+      const allBook = [simpanBuku];
+      localStorage.setItem("allBook", JSON.stringify(allBook));
+    }
+    document.getElementById("add").reset();
+    search();
+    unfinish('');
+    finish('');
+  } catch (err) {
+    console.log(err);
   }
-  console.log(simpanBuku)
-  if (localStorage.length > 0) {
-    let allBook = JSON.parse(localStorage.getItem("allBook"));
-    allBook.push(simpanBuku);
-    localStorage.setItem("allBook", JSON.stringify(allBook));
-  } else {
-    const allBook = [simpanBuku];
-    localStorage.setItem("allBook", JSON.stringify(allBook));
-  }
-  document.getElementById("add").reset();
-  unfinish('');
-  finish('');
 };
 
-const search = () => {
-  const judul = document.getElementById("search").value;
-  const allBook = JSON.parse(localStorage.getItem("allBook"));
-  let result = [];
+const search = (data) => {
+  const judul = data === false ? document.getElementById("search").value : data;
+  let allBook = JSON.parse(localStorage.getItem("allBook"));
+  allBook = allBook === null ? [] : allBook;
+  console.log('Check search:', allBook);
+  let result = allBook;
   if (allBook.length > 0) {
     document.getElementById("resultSearch").innerText= '';
     allBook.forEach((item, idx) => {
-      if ((item.judul).toLowerCase().includes(judul.toLowerCase())) {
+      if (judul && (item.judul).toLowerCase().includes(judul.toLowerCase())) {
         result.push(allBook[idx]);
       }
     })
   } else {
     const h2 = document.createElement("h2");
-    h2.innerText = 'DATABASE KOSONG';
+    h2.innerText = 'DATA TIDAK ADA/TIDAK DITEMUKAN';
     h2.classList.add("text-center");
     const div = document.getElementById("resultSearch");
-    div.appendChild(h2);
+    if (!document.getElementById('resultSearch').innerText) {
+      div.appendChild(h2);
+    }
   }
   document.getElementById("search").value = '';
   unfinish(result);
@@ -77,8 +101,8 @@ const remove = (id) => {
 
 const unfinish = (data) => {
   document.getElementById("listUnfinish").innerText = '';
-  const allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
-  console.log(allBook);
+  let allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
+  allBook = allBook === null ? [] : allBook;
   let unfinishBook = [];
   if (allBook.length > 0) {
     allBook.forEach((item, idx) => {
@@ -102,7 +126,8 @@ const unfinish = (data) => {
 
 const finish = (data) => {
   document.getElementById("listFinish").innerText = '';
-  const allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
+  let allBook = data === "" ? JSON.parse(localStorage.getItem("allBook")) : data;
+  allBook = allBook === null ? [] : allBook;
   let finishBook = [];
   if (allBook.length > 0) {
     allBook.forEach((item, idx) => {
