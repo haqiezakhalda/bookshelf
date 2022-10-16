@@ -41,15 +41,16 @@ const simpan = () => {
 };
 
 const search = (data) => {
-  const judul = data === false ? document.getElementById("search").value : data;
+  const judul = data === undefined ? document.getElementById("search").value : data;
+  console.log("Judul:", judul)
   let allBook = JSON.parse(localStorage.getItem("allBook"));
   allBook = allBook === null ? [] : allBook;
   console.log('Check search:', allBook);
-  let result = allBook;
+  let result = [];
   if (allBook.length > 0) {
     document.getElementById("resultSearch").innerText= '';
     allBook.forEach((item, idx) => {
-      if (judul && (item.judul).toLowerCase().includes(judul.toLowerCase())) {
+      if ((item.judul).toLowerCase().includes(judul.toLowerCase())) {
         result.push(allBook[idx]);
       }
     })
